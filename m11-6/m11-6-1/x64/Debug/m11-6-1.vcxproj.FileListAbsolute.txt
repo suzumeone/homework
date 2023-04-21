@@ -1,2 +1,0 @@
-D:\SourceCodes\cpp\homework\m11-6-1\x64\Debug\m11-6-1.exe
-D:\SourceCodes\cpp\homework\m11-6\m11-6-1\x64\Debug\m11-6-1.exe

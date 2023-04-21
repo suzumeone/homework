@@ -1,7 +1,6 @@
 #Personal Folders
-.vs\
-m11-6\m11-6-1\x64
-m11-6\m11-6-2\x64
+.vs/
+x64/
 
 # Prerequisites
 *.d
