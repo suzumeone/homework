@@ -1,3 +1,7 @@
+#Personal Folders
+.vs\
+x64\
+
 # Prerequisites
 *.d
 
