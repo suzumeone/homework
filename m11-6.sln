@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "m11-6-2", "m11-6\m11-6-2\m1
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "m11-6-3", "m11-6\m11-6-3\m11-6-3.vcxproj", "{8C3CA01C-DC22-4828-80E3-566BA47AAB37}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "m11-6-4", "m11-6-4\m11-6-4.vcxproj", "{FE468EC5-BE35-4BCE-AF27-F9D690412EE8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "m11-6-4", "m11-6\m11-6-4\m11-6-4.vcxproj", "{FE468EC5-BE35-4BCE-AF27-F9D690412EE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
