@@ -20,19 +20,19 @@ string encrypt_caesar(string str, int key)
         else
             continue;
     }
-
     return str;
 }
 
 string decrypt_caesar(string str, int key)
 {
-    return encrypt_caesar(str, 26 - key);
+    return encrypt_caesar(str, 26 - (key%26));
 }
 
 int main()
 {
     string str;
     int key;
+
     cout << "Message: ";
     getline(cin, str);
 
