@@ -12,9 +12,6 @@ vector<int> removeNum(std::vector<int> nums, int numToDelete)
 	{
 		if (nums.at(i) == numToDelete)
 		{
-			nums.resize(nums.size() + 1);
-			std::swap(nums.at(i), nums.back());
-			nums.pop_back();
 			for (int j = i, k = i + 1; j < nums.size() - 1; j++)
 			{
 				std::swap(nums.at(j), nums.at(k));
