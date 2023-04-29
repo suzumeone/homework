@@ -22,28 +22,25 @@ void printTable(char table[][3])
 
 char checkTable(char table[][3])
 {
-	//checking rows
+	//rows
 	for (int i = 0; i < 3; i++)
 	{
 		if (table[i][0] == table[i][1] && table[i][1] == table[i][2])
 			return table[i][0];
 	}
 
+	//colums
 	for (int i = 0; i < 3; i++)
 	{
 		if (table[0][i] == table[1][i] && table[1][i] == table[2][i])
 			return table[i][i];
 	}
 
+	//diagonal
 	if (table[0][0] == table[1][1] && table[1][1] == table[2][2])
 		return table[1][1];
 	if (table[0][2] == table[1][1] && table[1][1] == table[2][0])
 		return table[1][1];
 	
 	return 'c';
-}
-
-bool is_empty(int row, int column, char table[][3])
-{
-	return true;
 }
