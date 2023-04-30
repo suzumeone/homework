@@ -17,14 +17,18 @@ int main()
 
 	while (popCtr < 144)
 	{
-		std::cout << "Input start index to burst (1-143): ";
-		int start, end;
-		std::cin >> start;
-		std::cout << "Input end index to burst (" << start << "-144): ";
-		std::cin >> end;
-		if ((start >= 1 && start <= 143) && (end > start && end <= 144))
+		int sX, sY, eX, eY;
+		std::cout << "Input start position X (1-12): ";
+		std::cin >> sX;
+		std::cout << "Input start position Y (1-12): ";
+		std::cin >> sY;
+		std::cout << "Input end position X (1-12): ";
+		std::cin >> eX;
+		std::cout << "Input end position Y (1-12): ";
+		std::cin >> eY;
+		if (sX <= 12 && sY <= 12 && eX <= 12 && eY <= 12)
 		{
-			popCtr += burstRange(bw, start, end);
+			popCtr += burstRange(bw, sX, sY, eX, eY);
 			printM(bw);
 		}
 		else
