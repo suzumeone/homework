@@ -25,27 +25,19 @@ void printM(char matrix[][12])
 
 int burstRange(char bw[][12], int startX,int startY, int endX, int endY)
 {
-	int startIndex = startY * 12 + startX;
-	int endIndex = endY * 12 + endX;
-	int r = endIndex - startIndex;
-
-	for (int i = startY -1; ; i++)
+	for (int i = startY-1; i < endY; i++)
 	{
-		for (int j = startX - 1; ; j++)
+		for (int j = startX-1; j < endX; j++)
 		{
-			if (r >= 0)
+			if (bw[i][j] != 'x')
 			{
 				bw[i][j] = 'x';
+				std::cout << "Pop!" << std::endl;
 				popCtr++;
-				std::cout << "x" << popCtr << " Pop!" << std::endl;
-				r--;
-
 			}
 			else
-			{
-				return popCtr;
-			}
-
+				continue;
 		}
 	}
+	return popCtr;
 }
