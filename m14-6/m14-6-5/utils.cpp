@@ -19,8 +19,8 @@ void printM(char matrix[][12])
 		}
 		std::cout << std::endl;
 	}
-	std::cout << "----------------------------------------> X" <<std::endl;
-	std::cout << "     1  2  3  4  5  6  7  8  9  10 11 12" <<std::endl;
+	std::cout << "---+------------------------------------> X" <<std::endl;
+	std::cout << "   | 1  2  3  4  5  6  7  8  9  10 11 12" <<std::endl;
 }
 
 int burstRange(char bw[][12], int startX,int startY, int endX, int endY)
