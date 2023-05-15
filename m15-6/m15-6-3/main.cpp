@@ -1,63 +1,46 @@
-#include <iostream>
-#include <vector>
+﻿#include <iostream>
 
-void bubbleSort(std::vector<int>& vec) {
-	int n = vec.size();
-	for (int i = 0; i < n - 1; i++) {
-		for (int j = 0; j < n - i - 1; j++) {
-			if (vec[j] > vec[j + 1]) {
-				std::swap(vec[j], vec[j+1]);
-			}
-		}
-	}
+void insertIntoArray(int array[], int size, int number) {
+    int index = size - 1;
+
+    while (index >= 0 && array[index] > number) {
+        array[index + 1] = array[index];
+        index--;
+    }
+
+    array[index + 1] = number;
 }
 
-void printV(std::vector<int>& vec)
-{
-	for (int i = 0; i < vec.size(); i++)
-		std::cout << vec.at(i) << " ";
-}
+int main() {
+    const int ARRAY_SZ = 5;
+    int numbers[ARRAY_SZ] = { 0 };
+    int count = 0;
 
-std::vector<int> unicNums(std::vector<int> osv)//originalSortedVector
-{
-	std::vector<int> unicVec;
-	int prevNum = osv[0];
+    while (true) {
+        int input;
+        std::cin >> input;
 
-	for (int i = 1; i < osv.size(); i++)
-	{
-		if (prevNum != osv[i])
-		{
-			unicVec.push_back(prevNum);
-			prevNum = osv[i];
-		}
-	}
-	unicVec.push_back(prevNum);
-	return unicVec;
-}
+        if (input == -2) {
+            break;
+        }
+        else if (input == -1) {
+            if (count >= 5) {
+                std::cout << "Fifth number:" << numbers[4] << std::endl;
+            }
+            else {
+                std::cout << "There are not enough numbers to display the fifth number." << std::endl;
+            }
+        }
+        else {
+            if (count < 5) {
+                insertIntoArray(numbers, count, input);
+                count++;
+            }
+            else if (input < numbers[ARRAY_SZ - 1]) {
+                insertIntoArray(numbers, ARRAY_SZ - 1, input);
+            }
+        }
+    }
 
-int main()
-{
-	std::vector<int> vec;
-	int input = 0;
-	for(;;)
-	{
-		for (;;)
-		{
-			std::cout << "Input: ";
-			std::cin >> input;
-			if (input == -1)
-				break;
-			if (input == -2)
-				return 0;
-			vec.push_back(input);
-		}
-
-		std::cout << "Output: ";
-		bubbleSort(vec);
-		std::cout << unicNums(vec)[4] << " (Sorted array preview: { ";
-		printV(vec);
-		std::cout << "})" << std::endl;
-	}
-
-	return 0;
+    return 0;
 }
