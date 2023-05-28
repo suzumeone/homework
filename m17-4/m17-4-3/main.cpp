@@ -2,22 +2,30 @@
 
 bool substr(const char* str, const char* substr)
 {
-	for (int i = 0; i < strlen(str) - strlen(substr)+1; i++)
-	{
-		for (int j = 0; j < strlen(substr); j++)
-		{
-			if (j == strlen(substr) - 1 && str[i + j] == substr[j])
-				return true;
-		}
-	}
-	return false;
+    int strLength = strlen(str);
+    int substrLength = strlen(substr);
+
+    for (int i = 0; i <= strLength - substrLength; i++)
+    {
+        int j;
+        for (j = 0; j < substrLength; j++)
+        {
+            if (str[i + j] != substr[j])
+                break;
+        }
+
+        if (j == substrLength)
+            return true;
+    }
+
+    return false;
 }
 
 int main()
 {
 	const char* a = "Hello world";
 
-	const char* b = "wor";
+	const char* b = "11r";
 
 	const char* c = "banana";
 
