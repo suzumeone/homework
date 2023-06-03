@@ -1,0 +1,15 @@
+Salmon
+Tuna
+Trout
+Cod
+Snapper
+Bass
+Halibut
+Sardine
+Mackerel
+Swordfish
+Haddock
+Perch
+Mahi Mahi
+Grouper
+Catfish
