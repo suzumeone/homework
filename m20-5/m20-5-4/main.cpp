@@ -1,95 +1,88 @@
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 
-const int MAX_NOTES = 1000;
+const int MAX_BILLS = 1000;
+const int NUM_BILLS = 5;
+const int BILL_DENOMINATIONS[NUM_BILLS] = { 5000, 1000, 500, 200, 100 };
 
-void refillATM() 
+void saveStateToFile(const int* bills)
 {
-    std::ofstream file("banknotes.bin", std::ios::binary);
-
-    int banknotes[MAX_NOTES];
-
-    for (int i = 0; i < MAX_NOTES; ++i)
-        banknotes[i] = (std::rand() % 50 + 1) * 100;
- 
-
-    file.write(reinterpret_cast<char*>(banknotes), sizeof(banknotes));
-
+    std::ofstream file("atm_state.bin", std::ios::binary);
+    file.write(reinterpret_cast<const char*>(bills), MAX_BILLS * sizeof(int));
     file.close();
-
-    std::cout << "The ATM has been successfully filled." << std::endl;
 }
 
-void withdrawFromATM(int amount) 
+void loadStateFromFile(int* bills)
 {
-    std::ifstream file("banknotes.bin", std::ios::binary);
+    std::ifstream file("atm_state.bin", std::ios::binary);
+    file.read(reinterpret_cast<char*>(bills), MAX_BILLS * sizeof(int));
+    file.close();
+}
 
-    if (!file)
+void refillATM(int* bills)
+{
+    for (int i = 0; i < 1000; i++)
     {
-        std::cout << "Error: Banknote file not found." << std::endl;
+        if (bills[i] == 0)
+            bills[i] = BILL_DENOMINATIONS[std::rand() % 5];
+    }
+}
+
+void withdrawMoney(int* bills, int amount)
+{
+    int sum = 0;
+    for (int i = 0; i < MAX_BILLS; ++i) 
+        sum += bills[i];
+    if (sum < amount) 
+    {
+        std::cout << "Operation is not possible. There is not enough money in the ATM." << std::endl;
         return;
     }
 
-    int banknotes[MAX_NOTES];
-    file.read(reinterpret_cast<char*>(banknotes), sizeof(banknotes));
-
-    file.close();
-
-    int remainingAmount = amount;
     int withdrawnAmount = 0;
-    int withdrawnNotes[MAX_NOTES];
-    int numWithdrawnNotes = 0;
-
-    for (int i = 0; i < MAX_NOTES && remainingAmount > 0; ++i) 
+    for (int i = 0; i < MAX_BILLS; ++i) 
     {
-        if (banknotes[i] != 0 && banknotes[i] <= remainingAmount) 
+        if (bills[i] != 0) 
         {
-            withdrawnNotes[numWithdrawnNotes] = banknotes[i];
-            numWithdrawnNotes++;
-            withdrawnAmount += banknotes[i];
-            remainingAmount -= banknotes[i];
-            banknotes[i] = 0;
+            withdrawnAmount += bills[i];
+            bills[i] = 0;
+            if (withdrawnAmount >= amount) 
+                break;
         }
     }
 
-    if (withdrawnAmount < amount) 
-    {
-        std::cout << "Error: The operation is not possible. There are not enough suitable banknotes in the ATM." << std::endl;
-        return;
-    }
-
-    std::ofstream outFile("banknotes.bin", std::ios::binary);
-    outFile.write(reinterpret_cast<char*>(banknotes), sizeof(banknotes));
-    outFile.close();
-
-    std::cout << "Sum " << amount << " rubles successfully withdrawn. Banknotes: ";
-    for (int i = 0; i < numWithdrawnNotes; ++i)
-        std::cout << withdrawnNotes[i] << " ";
-    std::cout << std::endl;
+    std::cout << "Sum " << amount << " rubles successfully withdrawn." << std::endl;
 }
 
-int main() 
+int main()
 {
-    std::srand(std::time(nullptr));
+    int bills[MAX_BILLS] = { 0 };
 
     char operation;
-    std::cout << "Enter the operation (+ for filling, - for withdrawing): ";
+    std::cout << "Enter '+' for fill the ATM or '-' for withdrawal:";
     std::cin >> operation;
 
-    if (operation == '+')
-        refillATM();
+    if (operation == '+') 
+    {
+        refillATM(bills);
+        std::cout << "The ATM was successfully refilled." << std::endl;
+    }
     else if (operation == '-') 
     {
+        loadStateFromFile(bills);
         int amount;
-        std::cout << "Enter amount to withdraw: ";
+        std::cout << "Enter the amount to withdraw (with an accuracy of 100 rubles): ";
         std::cin >> amount;
-
-        withdrawFromATM(amount);
+        withdrawMoney(bills, amount);
     }
-    else
-        std::cout << "Error: Invalid operation." << std::endl;
+    else 
+    {
+        std::cout << "Incorrect operation." << std::endl;
+        return 0;
+    }
 
-    return EXIT_SUCCESS;
+    saveStateToFile(bills);
+
+    return 0;
 }
