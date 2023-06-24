@@ -1,0 +1,9 @@
+#folders
+.vs/
+x64/
+
+
+#cmake folders
+build/
+bin/
+
