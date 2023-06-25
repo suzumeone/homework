@@ -1,10 +1,17 @@
 #include "utils.h"
 
+void clean(std::string& data, std::string& number, std::string& surname)
+{
+        data = "\0"; 
+        number = "\0";
+        surname = "\0";
+}
+
 bool checkNumber(std::string& number)
 {
-    if (stoi(number.substr(0, 2)) >= 0 && stoi(number.substr(0, 2)) <= 99)
+    if (stoi(number.substr(0, 2)) >= 0 && stoi(number.substr(0, 2)) <= 99 && number.substr(2, 1) == "-")
     {
-        if (stoi(number.substr(3, 2)) >= 0 && stoi(number.substr(3, 2)) <= 99)
+        if (stoi(number.substr(3, 2)) >= 0 && stoi(number.substr(3, 2)) <= 99 && number.substr(5,1) == "-")
         {
             if (stoi(number.substr(6, 2)) >= 0 && stoi(number.substr(6, 2)) <= 99)
                 return true;
@@ -42,43 +49,9 @@ bool SeparateData(std::string& data, std::string& number, std::string& surname)
             number += c;
         else if (isalpha(c))
             surname += c;
-    }
-
-    if (number.length() != NUMBER_LENGHT)
-    {
-        if (!checkSurname(surname))
-        {
-            std::cout << "Invalid input." << std::endl;
-            data = "";
-            number = "\0";
-            surname = "\0";
+        else
             return false;
-        }
-
-    }
-    else if (number.length() == NUMBER_LENGHT)
-    {
-        if (!checkNumber(number))
-        {
-            std::cout << "Invalid input." << std::endl;
-            data = "";
-            number = "\0";
-            surname = "\0";
-            return false;
-        }
-        if (surname.length() > 1)
-        {
-            if (!checkSurname(surname))
-            {
-                std::cout << "Invalid input." << std::endl;
-                data = "";
-                number = "\0";
-                surname = "\0";
-                return false;
-            }
-        }
     }
 
-    return true;
-
+    return false;
 }
