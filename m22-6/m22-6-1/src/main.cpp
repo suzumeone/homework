@@ -51,6 +51,9 @@ int main()
                 else
                     std::cout << "Number linked to surname: " << it->second[0] << std::endl;
             }
+            else
+                std::cout << "Number not found." << std::endl;
+
         }
         clean(data, number, surname);
     }

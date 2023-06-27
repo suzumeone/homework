@@ -39,18 +39,31 @@ bool checkSurname(std::string& surname)
 
 bool SeparateData(std::string& data, std::string& number, std::string& surname)
 {
-    bool num = true;
-
     for (char c : data)
     {
         if (c == ' ')
-            num = false;
-        if (num && isdigit(c) || c == '-')
+            continue;
+        else if (isdigit(c) || c == '-')
             number += c;
         else if (isalpha(c))
             surname += c;
         else
             return false;
+    }
+    if (number != "" && surname != "")
+    {
+        if (checkNumber(number) && checkSurname(surname))
+            return true;
+    }
+    else if (number != "")
+    {
+        if (checkNumber(number))
+            return true;
+    }
+    else if (surname != "")
+    {
+        if (checkSurname(surname))
+            return true;
     }
 
     return false;
