@@ -1,4 +1,7 @@
 #include "logic.h"
+//#include <chrono>
+//#include <thread>
+
 
 int main()
 {
@@ -11,18 +14,21 @@ int main()
 
     readTasks(ended_tasks, tasks);
 
-    while(true)
-    {
-        Clear();
-        std::cout << "Start new task:\t\tbegin" << std::endl <<
+            std::cout << "\nStart new task:\t\tbegin" << std::endl <<
                      "End current task:\tend" << std::endl << 
                    "Show tasks list:\tstatus" << std::endl <<
                         "Exit program:\t\texit\n" << std::endl;
+
+    while(true)
+    {
+        //Clear();
         std::cout << ">>> ";
         std::cin >> input;
         if(input == "exit" || input == "EXIT" || input == "e" || input == "E")
+        {
+            saveTasks(tasks, ended_tasks);
             break;
-        
+        }
         if(input == "begin" || input == "Begin" || input == "BEGIN")
         {
             prev_task = curr_task;
@@ -66,6 +72,8 @@ int main()
             std::cout << "Incorrect input." << std::endl;
             continue;
         }
+        //std::cin.get();
+        //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         saveTasks(tasks, ended_tasks);
     }
 }
