@@ -8,7 +8,7 @@ project(m24-5-1
 
 set(EXECUTABLE_OUTPUT_PATH "../bin")
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/logic.cpp src/logic.h)
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
