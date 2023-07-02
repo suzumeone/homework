@@ -1,8 +1,5 @@
 #include <iostream>
-#include <sstream>
 #include <cstring>
-#include <chrono>
-#include <thread>
 #include <ctime>
 #include <iomanip>
 
@@ -21,7 +18,6 @@ int main()
 {
     std::string time;
     std::cout << "Timer: MM:SS" << std::endl;
-    std::tm tm{0};
     std::cin >> time;
     size_t sPos = time.find(":");
     std::stringstream ss(time);
@@ -41,20 +37,16 @@ int main()
         }
 
         if (left >= 0 && left <= 59 && right >= 0 && right <= 59);
-        ss >> std::get_time(&tm, "%M:%S");
-        while (tm.tm_min > 0 || tm.tm_sec > 0)
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(999));
-            if (tm.tm_sec == 0)
-            {
-                tm.tm_min--;
-                tm.tm_sec = 60;
-            }
-            tm.tm_sec--;
-            Clear();
-            std::cout << "Timer: MM:SS" << std::endl;
-            std::cout << std::put_time(&tm, "%M:%S") << std::endl;
 
+        std::time_t now = std::time(nullptr);
+        std::tm now_tm = *std::localtime(&now);
+        std::time_t end = std::time(nullptr);
+        end += left * 60 + right;
+        std::tm end_tm = *std::localtime(&end);
+        while (now < end)
+        {
+            //TODO
+            break;
         }
         std::cout << "DING! DING! DING!" << std::endl;
     }
