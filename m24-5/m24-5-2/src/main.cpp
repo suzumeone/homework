@@ -8,14 +8,13 @@
 
 int main()
 {
-    //YY/MM/DD
     std::map<std::time_t, std::vector<std::string>> birthdays;
     std::time_t t = std::time(nullptr);
     std::tm today = *std::localtime(&t);
+    std::string input;
 
     std::cout << "Valid input example: Name YYYY/MM/DD." << std::endl;
-    
-    std::string input;
+
     while(true)
     {
         std::cout << ">>> ";
@@ -39,7 +38,6 @@ int main()
         else
             std::cout << "Invalid input." << std::endl << "Valid input example: Name YYYY/MM/DD." << std::endl;
     }
-    int ctr = 0;
 
     for (const auto& day : birthdays)
     {
