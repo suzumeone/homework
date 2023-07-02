@@ -69,6 +69,7 @@ int main()
                 for (auto name : day.second)
                     std::cout << name << " ";
                 std::cout << std::endl;
+                break;
             }        
         }
     }
