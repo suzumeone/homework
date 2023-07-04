@@ -8,7 +8,5 @@ project(m25-4-2
 
 set(EXECUTABLE_OUTPUT_PATH "../bin")
 
-add_executable(${PROJECT_NAME} src/main.cpp src/gpu.cpp src/disk.cpp src/cpu.cpp src/kbd.cpp src/ram.cpp)
+add_subdirectory(src)
 
-target_include_directories(${PROJECT_NAME} PUBLIC "include")
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
