@@ -57,6 +57,7 @@ private:
 	//Private Fields
 	bool m_is_playing = false;
 
+	//Private Methods
 	void displayTracks()
 	{
 		int i = 1;
@@ -79,7 +80,6 @@ public:
 	std::vector<Track> music;
 
 	//Public Methods
-
 	bool is_active()
 	{
 		return m_is_playing;
