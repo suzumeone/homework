@@ -135,8 +135,9 @@ std::string handleInput()
 
 int main()
 {
-	Player audioPlayer;
+	std::cout << "Audio Player: play, next, stop, pause, exit." << std::endl;
 
+	Player audioPlayer;
 
 	Track t1;
 	t1.set_title("Test1");
