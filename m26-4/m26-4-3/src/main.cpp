@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "color.hpp"
 
 class Window
 {
@@ -21,10 +22,10 @@ public:
     {
         int x;
         int y; 
-        std::cout << "Height | X: ";
-        std::cin >> x;
-        std::cout << "Width | Y: ";
+        std::cout << "Width | X: ";
         std::cin >> y;
+        std::cout << "Height | Y: ";
+        std::cin >> x;
         Vec vec;
         vec.x = x;
         vec.y = y;
@@ -57,8 +58,8 @@ public:
         if(pos.y > 80)  pos.y = 80;
         if(pos.y <  0)  pos.y = 0;
 
-        m_window_heigh = pos.x;
-        m_window_width = pos.y;
+        m_widow_pos_x = pos.x;
+        m_widow_pos_y = pos.y;
     }
 
     Vec get_pose()
@@ -81,18 +82,29 @@ private:
     void display(Window::Vec window_size, Window::Vec window_pos)
     {
         int pixel = 0;
-        for(int i = 0; i < 50; i++)
+        for(int i = 0; i <= 50; i++)
         {
-            for(int j = 0; j < 80; j++)
+            for(int j = 0; j <= 80; j++)
             {
-                if (i == window_pos.x && j == window_pos.y)
-                    pixel = 1;
-                if (i == i + window_size.x && j == j + window_size.y)
-                    pixel = 0;
+                if (window_size.x != 0 || window_size.y != 0)
+                {
+                    if ((i >= window_pos.x && i <= window_pos.x + window_size.x) && (j >= window_pos.y && j <= window_pos.y + window_size.y))
+                    {
+                        pixel = 1;
+                        std::cout << colors::bright_green;
+                    }
+                    else
+                    {
+                        pixel = 0;
+                        std::cout << colors::reset;
+                    }
+
+                }
                 std::cout << pixel << " ";
             }
             std::cout << std::endl;
         }
+        std::cout << colors::reset;
     }
 public:
     void turn_on()
@@ -125,6 +137,7 @@ public:
 
 int main()
 {
+    
     Display monitor;
     monitor.turn_on();
     delete& monitor;

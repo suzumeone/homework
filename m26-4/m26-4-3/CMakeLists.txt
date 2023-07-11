@@ -8,4 +8,4 @@ project(m26-4-3
 
 set(EXECUTABLE_OUTPUT_PATH "../bin")
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/color.hpp)
