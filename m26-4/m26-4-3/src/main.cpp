@@ -118,10 +118,7 @@ public:
             std::string input;
             std::cin >> input;
             if (input == "close")
-            {
-                delete& window;
                 break;
-            }
             else if(input == "move")
                 window.set_pos(window.fillVector());
             else if(input == "resize")
@@ -140,6 +137,5 @@ int main()
     
     Display monitor;
     monitor.turn_on();
-    delete& monitor;
     return 0;
 }
